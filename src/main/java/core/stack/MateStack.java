@@ -3,30 +3,48 @@ package core.stack;
 import java.util.EmptyStackException;
 
 public class MateStack<T> {
-    private MyLinkedList<T> list = new MyLinkedList<>();
-    private int size = 0;
-
+    private Node<T> tail = new Node<>(null, null);
+    private int arrSize = 0;
     public void push(T value) {
-        list.add(value);
-        size++;
+        if (arrSize == 0) {
+            tail.item =  value;
+        }
+        else {
+            tail =  new Node<>(tail, value);
+        }
+        arrSize++;
     }
 
     public T peek() {
-        if (size == 0) {
+        if (arrSize == 0) {
             throw new EmptyStackException();
         }
-        return list.get(size - 1);
+        return tail.item;
     }
 
     public T pop() {
-        if (size == 0) {
+        T value = tail.item;
+        if (arrSize == 0) {
             throw new EmptyStackException();
         }
-        size--;
-        return list.remove(size);
+        arrSize--;
+        tail = tail.prev;
+        return value;
     }
 
     public int size() {
-        return size;
+
+        return arrSize;
+    }
+
+    class Node<T> {
+        private Node<T> prev;
+        private T item;
+
+        public Node(Node<T> prev, T item) {
+            this.prev = prev;
+            this.item = item;
+        }
+
     }
 }
