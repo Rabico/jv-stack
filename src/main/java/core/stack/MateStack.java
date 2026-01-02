@@ -1,24 +1,21 @@
 package core.stack;
 
 import java.util.EmptyStackException;
-import java.util.LinkedList;
 
 public class MateStack<T> {
-    private LinkedList<T> list = new LinkedList<>();
+    private MyLinkedList<T> list = new MyLinkedList<>();
     private int size = 0;
 
     public void push(T value) {
-        if (!list.contains(value)) {
-            list.add(value);
-            size++;
-        }
+        list.add(value);
+        size++;
     }
 
     public T peek() {
         if (size == 0) {
             throw new EmptyStackException();
         }
-        return list.peekLast();
+        return list.get(size - 1);
     }
 
     public T pop() {
@@ -26,7 +23,7 @@ public class MateStack<T> {
             throw new EmptyStackException();
         }
         size--;
-        return list.removeLast();
+        return list.remove(size);
     }
 
     public int size() {
