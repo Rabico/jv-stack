@@ -5,12 +5,12 @@ import java.util.EmptyStackException;
 public class MateStack<T> {
     private Node<T> tail = new Node<>(null, null);
     private int arrSize = 0;
+
     public void push(T value) {
         if (arrSize == 0) {
-            tail.item =  value;
-        }
-        else {
-            tail =  new Node<>(tail, value);
+            tail.item = value;
+        } else {
+            tail = new Node<>(tail, value);
         }
         arrSize++;
     }
@@ -23,11 +23,11 @@ public class MateStack<T> {
     }
 
     public T pop() {
-        T value = tail.item;
         if (arrSize == 0) {
             throw new EmptyStackException();
         }
         arrSize--;
+        T value = tail.item;
         tail = tail.prev;
         return value;
     }
