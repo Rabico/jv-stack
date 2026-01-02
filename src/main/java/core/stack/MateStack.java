@@ -8,10 +8,10 @@ public class MateStack<T> {
     private int size = 0;
 
     public void push(T value) {
-    if (!list.contains(value)) {
-        list.add(value);
-        size++;
-    }
+        if (!list.contains(value)) {
+            list.add(value);
+            size++;
+        }
     }
 
     public T peek() {
@@ -25,7 +25,7 @@ public class MateStack<T> {
         if (size == 0) {
             throw new EmptyStackException();
         }
-        size --;
+        size--;
         return list.removeLast();
     }
 
