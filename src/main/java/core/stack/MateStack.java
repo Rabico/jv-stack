@@ -3,47 +3,46 @@ package core.stack;
 import java.util.EmptyStackException;
 
 public class MateStack<T> {
-    private Node<T> tail = new Node<>(null, null);
-    private int arrSize = 0;
+    private Node<T> top;
+    private int size = 0;
 
     public void push(T value) {
-        if (arrSize == 0) {
-            tail.item = value;
+        if (size == 0) {
+            top = new Node<>(null, value);
         } else {
-            tail = new Node<>(tail, value);
+            top = new Node<>(top, value);
         }
-        arrSize++;
+        size++;
     }
 
     public T peek() {
-        if (arrSize == 0) {
+        if (size == 0) {
             throw new EmptyStackException();
         }
-        return tail.item;
+        return top.value;
     }
 
     public T pop() {
-        if (arrSize == 0) {
+        if (size == 0) {
             throw new EmptyStackException();
         }
-        arrSize--;
-        T value = tail.item;
-        tail = tail.prev;
+        size--;
+        T value = top.value;
+        top = top.prev;
         return value;
     }
 
     public int size() {
-
-        return arrSize;
+        return size;
     }
 
-    class Node<T> {
+    private static class Node<T> {
         private Node<T> prev;
-        private T item;
+        private T value;
 
-        public Node(Node<T> prev, T item) {
+        private Node(Node<T> prev, T value) {
             this.prev = prev;
-            this.item = item;
+            this.value = value;
         }
 
     }
